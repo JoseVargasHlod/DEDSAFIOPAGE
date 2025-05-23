@@ -1,0 +1,186 @@
+import { useState } from 'react';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import LoginModal from '../components/LoginModal';
+import Registro from '../components/Registro';
+
+export default function ContactPage({ usuario, onLogout, onLoginClick, onRegisterClick, setUsuario }) {
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
+
+  // Estados del formulario
+  const [nombre, setNombre] = useState('');
+  const [correo, setCorreo] = useState('');
+  const [asunto, setAsunto] = useState('');
+  const [mensaje, setMensaje] = useState('');
+  
+  const [mensajeEnviado, setMensajeEnviado] = useState(false);
+const [enviando, setEnviando] = useState(false);
+
+
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  setEnviando(true); // Empieza el envío
+
+  const payload = { nombre, correo, asunto, mensaje };
+
+  try {
+    const res = await fetch('http://localhost:5000/api/contacto', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (res.ok) {
+      setMensajeEnviado(true);
+      setNombre('');
+      setCorreo('');
+      setAsunto('');
+      setMensaje('');
+      setTimeout(() => setMensajeEnviado(false), 3000);
+    } else {
+      alert('Hubo un error al enviar el mensaje');
+    }
+  } catch (error) {
+    console.error(error);
+    alert('Error al conectar con el servidor');
+  } finally {
+    setEnviando(false); // Finaliza el envío
+  }
+};
+
+
+
+  return (
+    
+    <div className="bg-black text-white flex flex-col min-h-screen">
+      {enviando && (
+  <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div className="bg-zinc-800 text-white px-6 py-4 rounded shadow-lg animate-pulse">
+      Enviando mensaje...
+    </div>
+  </div>
+)}
+
+      {mensajeEnviado && (
+  <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+    <div className="bg-green-600 text-white px-6 py-4 rounded shadow-lg animate-bounce">
+      ¡Mensaje enviado con éxito!
+    </div>
+  </div>
+)}
+
+      <Navbar
+        usuario={usuario}
+        onLogout={onLogout}
+        onLoginClick={() => setShowLogin(true)}
+        onRegisterClick={() => setShowRegister(true)}
+      />
+
+      <main className="grow bg-black text-white flex flex-col lg:flex-row items-center justify-center px-4 py-16">
+        {/* Imagen a la izquierda */}
+<div className="hidden lg:flex lg:w-1/4 justify-center mb-10 lg:mb-0">
+
+  <img
+    src="\img\ded.jpeg"
+    alt="Personajes Minecraft"
+    className="w-[600px] h-auto rounded-xl shadow-lg"
+  />
+</div>
+
+
+        {/* Formulario y texto a la derecha */}
+        <div className="w-full lg:w-1/2 max-w-xl px-8">
+          <h1 className="text-4xl font-bold mb-4">Contacto</h1>
+          <p className="mb-4">
+            Quieres formar parte de Dedsafio siendo socio o creando un proyecto.
+          </p>
+          <p className="mb-6">
+            ¿Tienes una idea brillante y no sabes por dónde iniciar? ¡Contáctanos!
+          </p>
+
+          {/* Formulario */}
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <div className="flex gap-4">
+              <input
+                type="text"
+                placeholder="Nombre"
+                value={nombre}
+                onChange={(e) => setNombre(e.target.value)}
+                required
+                className="w-full p-3 rounded bg-zinc-800 text-white border border-zinc-700"
+              />
+              <input
+                type="email"
+                placeholder="Correo Electrónico"
+                value={correo}
+                onChange={(e) => setCorreo(e.target.value)}
+                required
+                className="w-full p-3 rounded bg-zinc-800 text-white border border-zinc-700"
+              />
+            </div>
+            <input
+              type="text"
+              placeholder="Asunto"
+              value={asunto}
+              onChange={(e) => setAsunto(e.target.value)}
+              required
+              className="w-full p-3 rounded bg-zinc-800 text-white border border-zinc-700"
+            />
+            <textarea
+              placeholder="Escribe tu mensaje para nosotros aquí."
+              value={mensaje}
+              onChange={(e) => setMensaje(e.target.value)}
+              rows="5"
+              required
+              className="w-full p-3 rounded bg-zinc-800 text-white border border-zinc-700"
+            />
+            <button
+              type="submit"
+              className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-6 rounded"
+            >
+              Enviar
+            </button>
+
+            {/* Vía X (Twitter) */}
+            <div className="mt-6 text-center">
+              <p className="text-zinc-400 mb-2">O escríbenos vía X</p>
+              <a
+                href="https://x.com/dedsafio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-white hover:text-purple-400 transition"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M22.162 0h-2.924l-6.27 6.545L7.016 0H0l8.946 12.664L.45 24h2.924l6.702-6.999L17.43 24H24l-9.645-13.657L22.162 0z" />
+                </svg>
+                @dedsafio
+              </a>
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <Footer />
+
+      {/* Modales de login y registro */}
+      {!usuario && showLogin && (
+        <LoginModal
+          onClose={() => setShowLogin(false)}
+          onLogin={(userData) => {
+            setUsuario(userData);
+            localStorage.setItem('usuario', JSON.stringify(userData));
+            setShowLogin(false);
+          }}
+        />
+      )}
+      {showRegister && (
+        <Registro onClose={() => setShowRegister(false)} />
+      )}
+    </div>
+  );
+}

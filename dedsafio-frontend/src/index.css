@@ -1,0 +1,480 @@
+@import "tailwindcss";
+
+/*Retro -> npm install @fontsource/press-start-2p*/
+@import "@fontsource/press-start-2p";
+
+
+/* Importa Poppins -> npm install @fontsource/poppins */
+@import "@fontsource/poppins"; /* esta es la versión regular 400 */
+
+
+/* Definir la clase font-poppins */
+.font-poppins {
+  font-family: "Poppins", sans-serif;
+}
+
+
+/*Titulo*/
+
+.rainbow-text {
+  background: linear-gradient(
+    270deg,
+    #ff0000,
+    #ff7f00,
+    #ffff00,
+    #00ff00,
+    #0000ff,
+    #4b0082,
+    #8f00ff,
+    #ff0000
+  );
+  background-size: 1600% 1600%;
+  animation: rainbow 10s ease infinite;
+
+  /* Para WebKit (Chrome, Safari) */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Para Firefox */
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes colorShift {
+  0%, 100% { color: #22c55e; }   /* verde */
+  14%      { color: #3b82f6; }   /* azul */
+  28%      { color: #f59e0b; }   /* amarillo/naranja */
+  42%      { color: #ef4444; }   /* rojo */
+  56%      { color: #a855f7; }   /* morado */
+  70%      { color: #06b6d4; }   /* cian */
+  84%      { color: #10b981; }   /* verde claro */
+}
+
+/* Para que la animación dure 7s y se repita infinitamente */
+.letter {
+  animation-name: colorShift;
+  animation-duration: 7s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-fill-mode: both; /* <- Aquí */
+}
+
+
+
+
+/* Definir estilo de boton Login */
+.login-button {
+  background: transparent;
+  position: relative;
+  padding: 2px 10px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgb(40, 144, 241);
+  border-radius: 25px;
+  outline: none;
+  overflow: hidden;
+  color: rgb(238, 238, 238);
+  transition: color 0.3s 0.1s ease-out;
+  text-align: center;
+}
+
+.login-button span {
+  margin: 10px;
+}
+
+.login-button::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  content: '';
+  border-radius: 50%;
+  display: block;
+  width: 20em;
+  height: 20em;
+  left: -5em;
+  text-align: center;
+  transition: box-shadow 0.5s ease-out;
+  z-index: -1;
+}
+
+.login-button:hover {
+  color: #fff;
+  border: 1px solid rgb(223, 76, 76);
+}
+
+.login-button:hover::before {
+  box-shadow: inset 0 0 0 10em rgb(223, 10, 39);
+}
+
+
+/* Definir estilo de boton Login ya con sesion */
+.login-buttonSesion {
+  background: transparent;
+  position: relative;
+  padding: 4px 18px;
+  display: flex;
+  align-items: center;
+  font-size: 19px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgb(40, 144, 241);
+  border-radius: 25px;
+  outline: none;
+  overflow: hidden;
+  color: rgb(238, 238, 238);
+  transition: color 0.3s 0.1s ease-out;
+  text-align: center;
+}
+
+.login-buttonSesion span {
+  margin: 10px;
+}
+
+.login-buttonSesion::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  content: '';
+  border-radius: 50%;
+  display: block;
+  width: 20em;
+  height: 20em;
+  left: -5em;
+  text-align: center;
+  transition: box-shadow 0.5s ease-out;
+  z-index: -1;
+}
+
+.login-buttonSesion:hover {
+  color: #fff;
+  border: 1px solid rgb(223, 76, 76);
+}
+
+.login-buttonSesion:hover::before {
+  box-shadow: inset 0 0 0 10em rgb(223, 10, 39);
+}
+
+
+/**Boton agregar carrito */
+
+/* From Uiverse.io by JaydipPrajapati1910 */ 
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  gap: 15px;
+  background-color: #181717;
+  outline: 3px #181717 solid;
+  outline-offset: -3px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.button .text {
+  color: rgb(63, 189, 211);
+  font-weight: 700;
+  font-size: 1em;
+  transition: 400ms;
+}
+
+.button svg path {
+  transition: 400ms;
+}
+
+.button:hover {
+  background-color: transparent;
+}
+
+.button:hover .text {
+  color: #181717;
+}
+
+.button:hover svg path {
+  fill: #181717;
+}
+
+/* VER */ 
+.button2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  gap: 15px;
+  background-color: #181717;
+  outline: 3px #181717 solid;
+  outline-offset: -3px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+
+   margin-top: 20px; /* espacio arriba */
+}
+
+.button2 .text {
+  color: rgb(63, 189, 211);
+  font-weight: 700;
+  font-size: 1em;
+  transition: 400ms;
+}
+
+.button2 svg path {
+  transition: 400ms;
+}
+
+.button2:hover {
+  background-color: transparent;
+}
+
+.button2:hover .text {
+  color: #181717;
+}
+
+.button2:hover svg path {
+  fill: #181717;
+}
+
+/*Boton elegante*/
+
+
+.boton-elegante {
+  padding: 15px 30px;
+  border: 2px solid #2c2c2c;
+  background-color: #1a1a1a;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  border-radius: 30px;
+  transition: all 0.4s ease;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+  font-weight: bold;
+
+  margin-top: 20px; /* espacio arriba */
+}
+
+.boton-elegante::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.25) 0%,
+    rgba(255, 255, 255, 0) 70%
+  );
+  transform: scale(0);
+  transition: transform 0.5s ease;
+}
+
+.boton-elegante:hover::after {
+  transform: scale(4);
+}
+
+.boton-elegante:hover {
+  border-color: #666666;
+  background: #292929;
+}
+
+
+/*Ver todo*/
+
+/* VER */ 
+.button3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  gap: 15px;
+  background-color: #2abbdf;
+  outline: 3px #2abbdf solid;
+  outline-offset: -3px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+
+   margin-top: 20px; /* espacio arriba */
+}
+
+.button3 .text {
+  color: rgb(26, 104, 150);
+  font-weight: 700;
+  font-size: 1em;
+  transition: 400ms;
+}
+
+.button3 svg path {
+  transition: 400ms;
+}
+
+.button3:hover {
+  background-color: transparent;
+}
+
+.button3:hover .text {
+  color: #181717;
+}
+
+.button3:hover svg path {
+  fill: #181717;
+}
+
+
+
+/*Buscador*/
+
+/* Formulario buscador estilo Uiverse */
+.form button {
+  border: none;
+  background: none;
+  color: #8b8ba7;
+  cursor: pointer;
+}
+
+.form {
+  --timing: 0.3s;
+  --width-of-input: 200px;
+  --height-of-input: 40px;
+  --border-height: 2px;
+  --input-bg: #1a1a1a; /* Cambié el fondo para que combine con bg-zinc-900 */
+  --border-color: #ef4444; /* rojo tailwind-500 */
+  --border-radius: 30px;
+  --after-border-radius: 1px;
+  position: relative;
+  width: var(--width-of-input);
+  height: var(--height-of-input);
+  display: flex;
+  align-items: center;
+  padding-inline: 0.8em;
+  border-radius: var(--border-radius);
+  transition: border-radius 0.5s ease;
+  background: var(--input-bg, #fff);
+}
+
+.input {
+  font-size: 0.9rem;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
+  padding-inline: 0.5em;
+  padding-block: 0.7em;
+  border: none;
+  color: white;
+}
+
+.form:before {
+  content: "";
+  position: absolute;
+  background: var(--border-color);
+  transform: scaleX(0);
+  transform-origin: center;
+  width: 100%;
+  height: var(--border-height);
+  left: 0;
+  bottom: 0;
+  border-radius: 1px;
+  transition: transform var(--timing) ease;
+}
+
+.form:focus-within {
+  border-radius: var(--after-border-radius);
+}
+
+.input:focus {
+  outline: none;
+}
+
+.form:focus-within:before {
+  transform: scale(1);
+}
+
+.reset {
+  border: none;
+  background: none;
+  opacity: 0;
+  visibility: hidden;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+input:not(:placeholder-shown) ~ .reset {
+  opacity: 1;
+  visibility: visible;
+}
+
+.form svg {
+  width: 17px;
+  margin-top: 3px;
+  stroke: #8b8ba7;
+}
+
+
+
+
+/* Volver a tienda */
+.volver {
+  background: transparent;
+  position: relative;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid rgb(241, 40, 40);
+  border-radius: 25px;
+  outline: none;
+  overflow: hidden;
+  color: rgb(238, 238, 238);
+  transition: color 0.3s 0.1s ease-out;
+  text-align: center;
+}
+
+.volver span {
+  margin: 10px;
+}
+
+.volver::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  content: '';
+  border-radius: 50%;
+  display: block;
+  width: 20em;
+  height: 20em;
+  left: -5em;
+  text-align: center;
+  transition: box-shadow 0.5s ease-out;
+  z-index: -1;
+}
+
+.volver:hover {
+  color: #fff;
+  border: 1px solid rgb(223, 76, 76);
+}
+
+.volver:hover::before {
+  box-shadow: inset 0 0 0 10em rgb(223, 10, 39);
+}
