@@ -2,6 +2,8 @@
 import { useState } from "react"; // Hook para manejar estados en componentes funcionales
 import Navbar from "../components/Navbar"; // Componente Navbar
 import Footer from "../components/Footer"; // Componente Footer
+import LoginModal from '../components/LoginModal'; // Modal para iniciar sesión
+import Registro from '../components/Registro'; // Modal para registro de usuario
 
 import { eventosData, getColorClass } from "../data/EventosData"; 
 // Importa datos de eventos y función para obtener clases de color según evento
@@ -17,7 +19,7 @@ export default function EventosPage({ usuario, onLogout, setUsuario }) {
   const [showRegister, setShowRegister] = useState(false);
 
   return (
-    <>
+    <div>
       {/* Barra de navegación con manejo de usuario y apertura de modales */}
       <Navbar
         usuario={usuario}
@@ -116,6 +118,37 @@ export default function EventosPage({ usuario, onLogout, setUsuario }) {
 
       {/* Pie de página */}
       <Footer />
-    </>
+            {/* Modal de Login: solo se muestra si showLogin es true */}
+      {showLogin && (
+        <LoginModal
+          onRegisterClick={() => {
+            setShowRegister(true); // Cambiar a modal de registro
+            setShowLogin(false);
+          }}
+          onClose={() => setShowLogin(false)} // Cierra modal login
+          onLogin={(userData) => {
+            setUsuario(userData); // Guarda usuario en estado padre
+            localStorage.setItem('usuario', JSON.stringify(userData)); // Guarda usuario en localStorage
+            setShowLogin(false); // Cierra modal login
+          }}
+        />
+      )}
+
+      {/* Modal de Registro: solo se muestra si showRegister es true */}
+      {showRegister && (
+        <Registro
+          onLoginClick={() => {
+            setShowRegister(false); // Cambiar a modal de login
+            setShowLogin(true);
+          }}
+          onClose={() => setShowRegister(false)} // Cierra modal registro
+          onRegister={(userData) => {
+            setUsuario(userData); // Guarda usuario en estado padre
+            localStorage.setItem('usuario', JSON.stringify(userData)); // Guarda usuario en localStorage
+            setShowRegister(false); // Cierra modal registro
+          }}
+        />
+      )}
+    </div>
   );
 }

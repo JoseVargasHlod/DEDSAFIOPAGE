@@ -66,7 +66,7 @@ export default function CarritoPage({ usuario, onLogout, onLoginClick, onRegiste
                 )}
                 <div>
                   <p className="font-semibold">{item.nombre}</p>
-                  <p className="text-sm text-gray-400 truncate">{item.descripcion}</p>
+                 {/* <p className="text-sm text-gray-400 truncate">{item.descripcion}</p> */}
                 </div>
               </div>
 
@@ -109,6 +109,8 @@ export default function CarritoPage({ usuario, onLogout, onLoginClick, onRegiste
       </main>
 
       <Footer />
+
+      
     </div>
   );
 }

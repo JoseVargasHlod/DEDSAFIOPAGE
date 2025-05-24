@@ -16,7 +16,7 @@ export default function Streaming() {
           {/* Redes sociales de elded */}
           <div className="flex justify-center gap-6 mt-4">
             {/* YouTube */}
-            <a href="https://www.youtube.com/@elded" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <a href="https://www.youtube.com/@deDOS" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
               <svg className="w-8 h-8 text-red-600 hover:scale-110 transition" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M23.498 6.186a2.998 2.998 0 0 0-2.112-2.118C19.517 3.5 12 3.5 12 3.5s-7.517 0-9.386.568A2.998 2.998 0 0 0 .502 6.186 31.067 31.067 0 0 0 0 12a31.067 31.067 0 0 0 .502 5.814 2.998 2.998 0 0 0 2.112 2.118C4.483 20.5 12 20.5 12 20.5s7.517 0 9.386-.568a2.998 2.998 0 0 0 2.112-2.118A31.067 31.067 0 0 0 24 12a31.067 31.067 0 0 0-.502-5.814ZM9.75 15.5v-7l6.25 3.5-6.25 3.5Z" />
               </svg>
@@ -38,14 +38,14 @@ export default function Streaming() {
             </a>
 
             {/* Instagram */}
-            <a href="https://www.instagram.com/elded/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a href="https://www.instagram.com/dedreviil/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
               <svg className="w-8 h-8 text-pink-500 hover:scale-110 transition" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M7.5 2h9A5.5 5.5 0 0 1 22 7.5v9A5.5 5.5 0 0 1 16.5 22h-9A5.5 5.5 0 0 1 2 16.5v-9A5.5 5.5 0 0 1 7.5 2Zm0-2A7.5 7.5 0 0 0 0 7.5v9A7.5 7.5 0 0 0 7.5 24h9A7.5 7.5 0 0 0 24 16.5v-9A7.5 7.5 0 0 0 16.5 0h-9Zm10.125 6.188a1.312 1.312 0 1 1-2.625 0 1.312 1.312 0 0 1 2.625 0ZM12 7.313a4.688 4.688 0 1 0 0 9.375 4.688 4.688 0 0 0 0-9.375Zm0 2.125a2.563 2.563 0 1 1 0 5.125 2.563 2.563 0 0 1 0-5.125Z" />
               </svg>
             </a>
 
             {/* TikTok */}
-            <a href="https://www.tiktok.com/@elded" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+            <a href="https://www.tiktok.com/dedreviil" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
               <svg className="w-8 h-8 text-white hover:scale-110 transition" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M9.875 3.188v13.5a2.625 2.625 0 1 1-2.625-2.625h.563V11.25h-.563a5.25 5.25 0 1 0 5.25 5.25V8.129c1.2.963 2.7 1.579 4.313 1.621V7.313c-.75 0-1.5-.188-2.188-.563a4.053 4.053 0 0 1-1.5-1.5 4.314 4.314 0 0 1-.562-2.188h-2.688Z" />
               </svg>
