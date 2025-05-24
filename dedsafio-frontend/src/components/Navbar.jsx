@@ -1,33 +1,38 @@
-import { useState, useRef, useEffect } from "react"; // Hooks de React
-import { useNavigate, useLocation } from "react-router-dom"; // Navegación y ubicación
-import { ShoppingCart, Menu, X, Search } from "lucide-react"; // Íconos de lucide-react
-import { useCart } from "../context/CartContext"; // Contexto del carrito
+import { useState, useRef, useEffect } from "react"; // Hooks de React para estado, referencias y efectos
+import { useNavigate, useLocation } from "react-router-dom"; // Hooks para navegación y ubicación en rutas
+import { FaShoppingCart } from "react-icons/fa"; // Icono carrito de compras
+import { FiMenu, FiX, FiSearch } from "react-icons/fi"; // Iconos menú, cerrar y búsqueda
+import { useCart } from "../context/CartContext"; // Contexto para obtener datos del carrito
 
+// Componente Navbar que recibe props del usuario y funciones para login/logout
 export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClick }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [loginDropdownOpen, setLoginDropdownOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
-  const [searchMobileOpen, setSearchMobileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false); // Estado para menú móvil abierto/cerrado
+  const [loginDropdownOpen, setLoginDropdownOpen] = useState(false); // Estado para dropdown login
+  const [cartOpen, setCartOpen] = useState(false); // Estado para carrito desplegado
+  const [searchMobileOpen, setSearchMobileOpen] = useState(false); // Estado para buscador móvil
 
-  const dropdownRef = useRef();
-  const cartRef = useRef();
+  const dropdownRef = useRef(); // Referencia al dropdown de login para detectar clic fuera
+  const cartRef = useRef(); // Referencia al carrito para detectar clic fuera
 
-  const navigate = useNavigate();
-  const location = useLocation();
-  const { cart } = useCart();
+  const navigate = useNavigate(); // Función para navegar entre rutas
+  const location = useLocation(); // Objeto con la ruta actual
 
-  const [busqueda, setBusqueda] = useState("");
+  const { cart } = useCart(); // Obtener carrito del contexto
 
+  const [busqueda, setBusqueda] = useState(""); // Estado para texto del buscador
+
+  // Función para manejar la búsqueda y navegar a página de resultados
   const handleBuscar = (e) => {
     e.preventDefault();
     if (busqueda.trim() !== "") {
       navigate(`/merch?buscar=${encodeURIComponent(busqueda)}`);
       setBusqueda("");
-      setSearchMobileOpen(false);
+      setSearchMobileOpen(false); // Cerrar buscador móvil después de buscar
       setMenuOpen(false);
     }
   };
 
+  // Efecto para cerrar dropdowns/menús al hacer clic fuera de ellos
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -39,11 +44,7 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
       if (!e.target.closest("#mobile-menu") && !e.target.closest("#menu-button")) {
         setMenuOpen(false);
       }
-      if (
-        !e.target.closest("#search-mobile") &&
-        !e.target.closest("#search-icon-mobile") &&
-        !e.target.closest("#search-desktop")
-      ) {
+      if (!e.target.closest("#search-mobile") && !e.target.closest("#search-icon-mobile") && !e.target.closest("#search-desktop")) {
         setSearchMobileOpen(false);
       }
     };
@@ -51,6 +52,7 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Función para navegar o hacer scroll suave a secciones según la ruta o ID
   const handleScrollOrNavigate = (target) => {
     if (target.startsWith("/")) {
       navigate(target);
@@ -66,11 +68,14 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
     }
   };
 
+  // Calcular cantidad total de productos en el carrito
   const totalCantidad = cart.reduce((acc, item) => acc + item.cantidad, 0);
 
   return (
     <header className="fixed top-0 left-0 w-full bg-zinc-900 shadow-md z-50">
       <div className="flex items-center justify-between w-full px-4 md:px-8 py-3">
+
+        {/* Izquierda: botón menú hamburguesa + título animado */}
         <div className="flex items-center space-x-6">
           <button
             id="menu-button"
@@ -83,9 +88,10 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
             }}
             aria-label="Abrir menú"
           >
-            {menuOpen ? <X /> : <Menu />}
+            {menuOpen ? <FiX /> : <FiMenu />}
           </button>
 
+          {/* Título con animación por letra que hace scroll o navegación */}
           <h1
             className="text-xl md:text-2xl font-['Press_Start_2P'] cursor-pointer flex space-x-1 text-white"
             onClick={() => handleScrollOrNavigate("inicio")}
@@ -100,6 +106,7 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
             <span className="letter" style={{ animationDelay: "-7s" }}>O</span>
           </h1>
 
+          {/* Navegación visible solo en escritorio */}
           <nav className="hidden md:flex items-center space-x-6 font-poppins text-white">
             <button onClick={() => handleScrollOrNavigate("inicio")} className="hover:text-red-400">Inicio</button>
             <button onClick={() => handleScrollOrNavigate("/eventos")} className="hover:text-red-400">Eventos</button>
@@ -109,7 +116,10 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
           </nav>
         </div>
 
+        {/* Derecha: buscador escritorio + iconos carrito, login y búsqueda móvil */}
         <div className="flex items-center space-x-4">
+
+          {/* Formulario buscador escritorio (oculto en móvil) */}
           <form
             onSubmit={handleBuscar}
             className="hidden md:flex items-center bg-zinc-800 rounded px-3 py-1"
@@ -125,7 +135,7 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
               id="search-desktop"
             />
             <button type="submit" aria-label="Buscar" className="text-white ml-2">
-              <Search size={20} />
+              <FiSearch size={20} />
             </button>
             {busqueda && (
               <button
@@ -134,11 +144,12 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
                 className="text-white ml-1"
                 aria-label="Limpiar búsqueda"
               >
-                <X size={20} />
+                <FiX size={20} />
               </button>
             )}
           </form>
 
+          {/* Icono búsqueda móvil (solo visible en móvil) */}
           <button
             id="search-icon-mobile"
             onClick={(e) => {
@@ -151,9 +162,10 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
             className="md:hidden text-white text-xl"
             aria-label="Buscar"
           >
-            <Search />
+            <FiSearch />
           </button>
 
+          {/* Carrito con contador y desplegable */}
           <div className="relative" ref={cartRef}>
             <button
               onClick={(e) => {
@@ -166,7 +178,7 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
               className="relative text-white hover:text-red-400"
               title="Carrito de compras"
             >
-              <ShoppingCart size={24} />
+              <FaShoppingCart size={24} />
               {totalCantidad > 0 && (
                 <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
                   {totalCantidad}
@@ -174,6 +186,7 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
               )}
             </button>
 
+            {/* Contenido del carrito desplegado */}
             {cartOpen && (
               <div className="absolute right-0 mt-2 w-72 max-h-96 bg-zinc-800 rounded shadow-lg p-4 overflow-y-auto z-50">
                 <h4 className="text-white font-semibold mb-3">Carrito</h4>
@@ -207,20 +220,23 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
             )}
           </div>
 
+          {/* Login/logout (oculto en móvil), con dropdown para usuario logueado */}
           <div className="relative ml-4 hidden md:block" ref={dropdownRef}>
             {!usuario ? (
-              <button
-                onClick={() => {
-                  onLoginClick();
-                  setLoginDropdownOpen(false);
-                  setMenuOpen(false);
-                  setCartOpen(false);
-                  setSearchMobileOpen(false);
-                }}
-                className="login-button text-white"
-              >
-                Iniciar Sesión
-              </button>
+              <>
+                <button
+                  onClick={() => {
+                    onLoginClick();
+                    setLoginDropdownOpen(false);
+                    setMenuOpen(false);
+                    setCartOpen(false);
+                    setSearchMobileOpen(false);
+                  }}
+                  className="login-button text-white"
+                >
+                  <span>Iniciar Sesión</span>
+                </button>
+              </>
             ) : (
               <div>
                 <button
@@ -268,6 +284,7 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
         </div>
       </div>
 
+      {/* Menú móvil desplegable */}
       {menuOpen && (
         <nav
           id="mobile-menu"
@@ -334,6 +351,7 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
         </nav>
       )}
 
+      {/* Buscador móvil desplegable */}
       {searchMobileOpen && (
         <form
           onSubmit={handleBuscar}
@@ -350,7 +368,7 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
             autoFocus
           />
           <button type="submit" aria-label="Buscar" className="text-white">
-            <Search size={24} />
+            <FiSearch size={24} />
           </button>
           {busqueda && (
             <button
@@ -359,7 +377,7 @@ export default function Navbar({ usuario, onLogout, onLoginClick, onRegisterClic
               className="text-white"
               aria-label="Limpiar búsqueda"
             >
-              <X size={24} />
+              <FiX size={24} />
             </button>
           )}
         </form>
