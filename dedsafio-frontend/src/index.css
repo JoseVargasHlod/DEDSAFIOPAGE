@@ -1,21 +1,18 @@
+/* Importar Tailwind CSS */
 @import "tailwindcss";
 
-/*Retro -> npm install @fontsource/press-start-2p*/
+/* Importar fuente "Press Start 2P" (retro) desde npm */
 @import "@fontsource/press-start-2p";
 
+/* Importar fuente "Poppins" versión regular 400 desde npm */
+@import "@fontsource/poppins";
 
-/* Importa Poppins -> npm install @fontsource/poppins */
-@import "@fontsource/poppins"; /* esta es la versión regular 400 */
-
-
-/* Definir la clase font-poppins */
+/* Definir clase para usar la fuente Poppins */
 .font-poppins {
   font-family: "Poppins", sans-serif;
 }
 
-
-/*Titulo*/
-
+/* Estilo para texto con degradado arcoíris animado */
 .rainbow-text {
   background: linear-gradient(
     270deg,
@@ -28,10 +25,10 @@
     #8f00ff,
     #ff0000
   );
-  background-size: 1600% 1600%;
-  animation: rainbow 10s ease infinite;
+  background-size: 1600% 1600%; /* Tamaño grande para animar el gradiente */
+  animation: rainbow 10s ease infinite; /* Animación infinita */
 
-  /* Para WebKit (Chrome, Safari) */
+  /* Para que el degradado se aplique solo al texto en Chrome y Safari */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 
@@ -40,6 +37,7 @@
   color: transparent;
 }
 
+/* Definición de la animación para cambiar colores */
 @keyframes colorShift {
   0%, 100% { color: #22c55e; }   /* verde */
   14%      { color: #3b82f6; }   /* azul */
@@ -50,19 +48,16 @@
   84%      { color: #10b981; }   /* verde claro */
 }
 
-/* Para que la animación dure 7s y se repita infinitamente */
+/* Aplicar animación de cambio de color a letras */
 .letter {
   animation-name: colorShift;
   animation-duration: 7s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  animation-fill-mode: both; /* <- Aquí */
+  animation-fill-mode: both; /* Mantiene el estado final de la animación */
 }
 
-
-
-
-/* Definir estilo de boton Login */
+/* Estilos para botón de login sin sesión */
 .login-button {
   background: transparent;
   position: relative;
@@ -81,16 +76,15 @@
   text-align: center;
 }
 
+/* Espaciado interno en el texto dentro del botón */
 .login-button span {
   margin: 10px;
 }
 
+/* Círculo grande para efecto visual detrás del botón */
 .login-button::before {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   margin: auto;
   content: '';
   border-radius: 50%;
@@ -100,20 +94,21 @@
   left: -5em;
   text-align: center;
   transition: box-shadow 0.5s ease-out;
-  z-index: -1;
+  z-index: -1; /* Detrás del texto */
 }
 
+/* Hover: cambio de color y borde */
 .login-button:hover {
   color: #fff;
   border: 1px solid rgb(223, 76, 76);
 }
 
+/* Hover: sombra interna roja grande para efecto */
 .login-button:hover::before {
   box-shadow: inset 0 0 0 10em rgb(223, 10, 39);
 }
 
-
-/* Definir estilo de boton Login ya con sesion */
+/* Estilos para botón login con sesión activa (más grande y padding distinto) */
 .login-buttonSesion {
   background: transparent;
   position: relative;
@@ -138,10 +133,7 @@
 
 .login-buttonSesion::before {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   margin: auto;
   content: '';
   border-radius: 50%;
@@ -163,10 +155,7 @@
   box-shadow: inset 0 0 0 10em rgb(223, 10, 39);
 }
 
-
-/**Boton agregar carrito */
-
-/* From Uiverse.io by JaydipPrajapati1910 */ 
+/* Botón para agregar al carrito, estilo desde Uiverse.io */
 .button {
   display: flex;
   justify-content: center;
@@ -205,7 +194,7 @@
   fill: #181717;
 }
 
-/* VER */ 
+/* Botón secundario similar al anterior con margen superior */
 .button2 {
   display: flex;
   justify-content: center;
@@ -219,8 +208,7 @@
   border: none;
   cursor: pointer;
   transition: 400ms;
-
-   margin-top: 20px; /* espacio arriba */
+  margin-top: 20px;
 }
 
 .button2 .text {
@@ -246,9 +234,7 @@
   fill: #181717;
 }
 
-/*Boton elegante*/
-
-
+/* Botón elegante con fondo oscuro, borde redondeado y efecto radial al pasar el cursor */
 .boton-elegante {
   padding: 15px 30px;
   border: 2px solid #2c2c2c;
@@ -262,15 +248,14 @@
   position: relative;
   overflow: hidden;
   font-weight: bold;
-
-  margin-top: 20px; /* espacio arriba */
+  margin-top: 20px;
 }
 
+/* Efecto radial invisible inicialmente */
 .boton-elegante::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 0; left: 0;
   width: 100%;
   height: 100%;
   background: radial-gradient(
@@ -282,19 +267,18 @@
   transition: transform 0.5s ease;
 }
 
+/* Al pasar el cursor, el radial se expande */
 .boton-elegante:hover::after {
   transform: scale(4);
 }
 
+/* Cambios en color y borde al hacer hover */
 .boton-elegante:hover {
   border-color: #666666;
   background: #292929;
 }
 
-
-/*Ver todo*/
-
-/* VER */ 
+/* Botón "Ver todo" con colores azulados y efecto hover */
 .button3 {
   display: flex;
   justify-content: center;
@@ -308,8 +292,7 @@
   border: none;
   cursor: pointer;
   transition: 400ms;
-
-   margin-top: 20px; /* espacio arriba */
+  margin-top: 20px;
 }
 
 .button3 .text {
@@ -335,11 +318,9 @@
   fill: #181717;
 }
 
+/* Estilos para formulario buscador */
 
-
-/*Buscador*/
-
-/* Formulario buscador estilo Uiverse */
+/* Botón del formulario sin borde ni fondo, solo texto gris claro */
 .form button {
   border: none;
   background: none;
@@ -347,13 +328,14 @@
   cursor: pointer;
 }
 
+/* Estilos generales del formulario */
 .form {
   --timing: 0.3s;
   --width-of-input: 200px;
   --height-of-input: 40px;
   --border-height: 2px;
-  --input-bg: #1a1a1a; /* Cambié el fondo para que combine con bg-zinc-900 */
-  --border-color: #ef4444; /* rojo tailwind-500 */
+  --input-bg: #1a1a1a; /* fondo oscuro */
+  --border-color: #ef4444; /* rojo */
   --border-radius: 30px;
   --after-border-radius: 1px;
   position: relative;
@@ -367,6 +349,7 @@
   background: var(--input-bg, #fff);
 }
 
+/* Estilos del campo input */
 .input {
   font-size: 0.9rem;
   background-color: transparent;
@@ -378,6 +361,7 @@
   color: white;
 }
 
+/* Línea de borde inferior animada */
 .form:before {
   content: "";
   position: absolute;
@@ -392,18 +376,22 @@
   transition: transform var(--timing) ease;
 }
 
+/* Cambia el borde redondeado cuando el formulario está enfocado */
 .form:focus-within {
   border-radius: var(--after-border-radius);
 }
 
+/* Quitar outline nativo al enfocar input */
 .input:focus {
   outline: none;
 }
 
+/* Animar la línea de borde cuando el input está enfocado */
 .form:focus-within:before {
   transform: scale(1);
 }
 
+/* Botón reset oculto por defecto */
 .reset {
   border: none;
   background: none;
@@ -415,21 +403,20 @@
   justify-content: center;
 }
 
+/* Mostrar botón reset cuando el input no está vacío */
 input:not(:placeholder-shown) ~ .reset {
   opacity: 1;
   visibility: visible;
 }
 
+/* Tamaño y color del icono SVG en el formulario */
 .form svg {
   width: 17px;
   margin-top: 3px;
   stroke: #8b8ba7;
 }
 
-
-
-
-/* Volver a tienda */
+/* Botón volver a tienda, con estilos similares a login, pero con color rojo */
 .volver {
   background: transparent;
   position: relative;
@@ -454,10 +441,7 @@ input:not(:placeholder-shown) ~ .reset {
 
 .volver::before {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  top: 0; left: 0; right: 0; bottom: 0;
   margin: auto;
   content: '';
   border-radius: 50%;

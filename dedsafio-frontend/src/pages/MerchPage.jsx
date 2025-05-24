@@ -6,12 +6,13 @@ import LoginModal from '../components/LoginModal';
 import Registro from '../components/Registro';
 
 export default function MerchPage({ usuario, onLogout, onLoginClick, onRegisterClick, setUsuario }) {
+  // Estados para controlar la visibilidad de los modales de login y registro
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
   return (
     <div className="bg-black text-white flex flex-col min-h-screen">
-      {/* Navbar */}
+      {/* Navbar con manejo de usuario y apertura de modales */}
       <Navbar
         usuario={usuario}
         onLogout={onLogout}
@@ -19,16 +20,15 @@ export default function MerchPage({ usuario, onLogout, onLoginClick, onRegisterC
         onRegisterClick={() => setShowRegister(true)}
       />
 
-{/* Contenido principal */}
-<div className="flex-grow">
-  <FullMerch />
-</div>
-
+      {/* Contenido principal donde se muestra la tienda completa */}
+      <div className="flex-grow">
+        <FullMerch />
+      </div>
 
       {/* Footer */}
       <Footer />
 
-      {/* Modales */}
+      {/* Modal de login, solo visible si no hay usuario autenticado */}
       {!usuario && showLogin && (
         <LoginModal
           onClose={() => setShowLogin(false)}
@@ -40,6 +40,7 @@ export default function MerchPage({ usuario, onLogout, onLoginClick, onRegisterC
         />
       )}
 
+      {/* Modal de registro */}
       {showRegister && (
         <Registro onClose={() => setShowRegister(false)} />
       )}

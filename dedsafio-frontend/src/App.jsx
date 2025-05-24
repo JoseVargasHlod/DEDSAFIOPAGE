@@ -1,4 +1,3 @@
-
 // App.jsx
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -15,17 +14,19 @@ import AcercaDePage from './pages/AcercaDePage.jsx';
 import EventosPage from './pages/EventosPage.jsx';
 
 function AppContent({ usuario, setUsuario }) {
+  // Estados para controlar la visibilidad de modales de login y registro
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
 
+  // Función para cerrar sesión y limpiar datos de usuario en localStorage
   const cerrarSesion = () => {
     setUsuario(null);
     localStorage.removeItem('usuario');
     localStorage.removeItem('token');
   };
 
+  // Manejo del login: actualizar estado y almacenamiento local
   const handleLogin = (userData) => {
-    // Solo actualizar usuario, el CartProvider detectará el cambio y hará la fusión automática
     setUsuario(userData);
     localStorage.setItem('usuario', JSON.stringify(userData));
     setShowLogin(false);
@@ -33,6 +34,7 @@ function AppContent({ usuario, setUsuario }) {
 
   return (
     <>
+      {/* Definición de rutas con sus componentes y props */}
       <Routes>
         <Route
           path="/"
@@ -56,7 +58,7 @@ function AppContent({ usuario, setUsuario }) {
               setUsuario={setUsuario} 
             />
           } 
-          />
+        />
         <Route
           path="/merch"
           element={
@@ -116,7 +118,6 @@ function AppContent({ usuario, setUsuario }) {
             />
           }
         />
-
         <Route
           path="/acerca"
           element={
@@ -129,32 +130,31 @@ function AppContent({ usuario, setUsuario }) {
             />
           }
         />
-
-
       </Routes>
 
-{!usuario && showLogin && (
-  <LoginModal
-    onClose={() => setShowLogin(false)}
-    onLogin={handleLogin}
-    onSwitchToRegister={() => {
-      setShowLogin(false);
-      setShowRegister(true);
-    }}
-  />
-)}
+      {/* Modal de login, solo si no hay usuario autenticado */}
+      {!usuario && showLogin && (
+        <LoginModal
+          onClose={() => setShowLogin(false)}
+          onLogin={handleLogin}
+          onSwitchToRegister={() => {
+            setShowLogin(false);
+            setShowRegister(true);
+          }}
+        />
+      )}
 
-
-{!usuario && showRegister && (
-  <RegisterModal
-    onClose={() => setShowRegister(false)}
-    onRegister={handleLogin}
-    onSwitchToLogin={() => {
-      setShowRegister(false);
-      setShowLogin(true);
-    }}
-  />
-)}
+      {/* Modal de registro, solo si no hay usuario autenticado */}
+      {!usuario && showRegister && (
+        <RegisterModal
+          onClose={() => setShowRegister(false)}
+          onRegister={handleLogin}
+          onSwitchToLogin={() => {
+            setShowRegister(false);
+            setShowLogin(true);
+          }}
+        />
+      )}
     </>
   );
 }
@@ -162,6 +162,7 @@ function AppContent({ usuario, setUsuario }) {
 export default function App() {
   const [usuario, setUsuario] = useState(null);
 
+  // Cargar usuario almacenado en localStorage al iniciar la app
   useEffect(() => {
     const storedUser = localStorage.getItem('usuario');
     if (storedUser) {
@@ -171,10 +172,10 @@ export default function App() {
 
   return (
     <Router>
+      {/* Proveedor de contexto para carrito, pasa el usuario actual */}
       <CartProvider usuario={usuario}>
         <AppContent usuario={usuario} setUsuario={setUsuario} />
       </CartProvider>
     </Router>
   );
 }
-

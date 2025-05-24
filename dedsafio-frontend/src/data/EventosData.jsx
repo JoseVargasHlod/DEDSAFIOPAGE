@@ -1,11 +1,12 @@
+// Arreglo con datos de eventos, cada objeto contiene id, título, fecha, fuente de video o imagen, resumen y color
 export const eventosData = [
   {
     id: 1,
-    title: "Dedsafio Minecraft 3",
-    date: "2024-09-25",
-    videoSrc: "/videos/dedsafio_minecraft3.mp4",
-    summary: "La tercera entrega del Dedsafio con un mundo mas dedsafiante.",
-    color: "green",
+    title: "Dedsafio Minecraft 3", // Título del evento
+    date: "2024-09-25",           // Fecha del evento
+    videoSrc: "/videos/dedsafio_minecraft3.mp4", // Ruta del video del evento
+    summary: "La tercera entrega del Dedsafio con un mundo mas dedsafiante.", // Resumen breve
+    color: "green",               // Color temático del evento para estilos
   },
   {
     id: 2,
@@ -19,7 +20,7 @@ export const eventosData = [
     id: 3,
     title: "Dedsafio Mortal Kombat",
     date: "2024-11-20",
-    imageSrc: "/img/dedsafio_mortalkombat.jpeg",
+    imageSrc: "/img/dedsafio_mortalkombat.jpeg", // Este evento tiene imagen en vez de video
     summary: "Torneo con streamers, ven a ver el ganador.",
     color: "yellow",
   },
@@ -41,6 +42,7 @@ export const eventosData = [
   },
 ];
 
+// Función que recibe un color y devuelve una clase CSS Tailwind para el texto de ese color
 export function getColorClass(color) {
   switch (color) {
     case "green":
@@ -54,6 +56,6 @@ export function getColorClass(color) {
     case "purple":
       return "text-purple-400";
     default:
-      return "text-white";
+      return "text-white"; // Clase por defecto si no coincide ningún color
   }
 }
