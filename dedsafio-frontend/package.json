@@ -16,10 +16,7 @@
     "lucide-react": "^0.510.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-<<<<<<< HEAD
-=======
     "react-icons": "^5.5.0",
->>>>>>> bf9552a (Se agrga el mensaje en el main)
     "react-router-dom": "^6.22.3",
     "react-twitter-embed": "^4.0.4",
     "swiper": "^11.2.6",
